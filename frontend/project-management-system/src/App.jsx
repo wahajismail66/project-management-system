@@ -1,8 +1,11 @@
+import { BrowserRouter } from "react-router-dom";
+import { AppRouter } from "./routes/AppRouter";
+
 const App = () => {
   return (
-    <>
-      <h1>Project Management System</h1>
-    </>
-)
-}
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
+  );
+};
 export default App;

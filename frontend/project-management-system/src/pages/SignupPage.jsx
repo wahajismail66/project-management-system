@@ -2,11 +2,17 @@ import { useState } from "react";
 import LiquidFormModal from "../components/LiquidFormModal";
 import { useNavigate } from "react-router-dom";
 
-export const LoginPage = () => {
+export const SignupPage = () => {
   const [form, setForm] = useState(true);
   const navigate = useNavigate();
 
-  const loginFields = [
+  const signupFields = [
+    {
+      name: "name",
+      label: "Name",
+      placeholder: "e.g John Doe",
+      required: true,
+    },
     {
       name: "username",
       label: "Email",
@@ -18,6 +24,14 @@ export const LoginPage = () => {
       label: "Password",
       type: "password",
       placeholder: "••••••••",
+      halfWidth: true,
+    },
+    {
+      name: "confirmPassword",
+      label: "Confirm Password",
+      type: "password",
+      placeholder: "••••••••",
+      halfWidth: true,
     },
   ];
 
@@ -29,14 +43,16 @@ export const LoginPage = () => {
       <div className="bg-gray-300 w-1/2 h-full relative">
         <LiquidFormModal
           isOpen={form}
-          title="Login"
-          fields={loginFields}
+          title="Sign up"
+          fields={signupFields}
           onSubmit={handleFormSubmit}
-          buttonText="Login"
+          buttonText="Sign up"
           buttonClassName="bg-blue-600/80 hover:bg-blue-600"
-          footerText="Don't have an account?"
-          footerLinkText="Sign up"
-          onFooterLinkClick={() => navigate("/sign-up")}
+          footerText="Already have an account?"
+          footerLinkText="Log in"
+          onFooterLinkClick={() => navigate("/login")}
+          containerClassName="max-w-sm p-6"
+          fieldsClassName="space-y-3"
         />
       </div>
       <div className="bg-blue-500 w-1/2 h-full flex items-center justify-center">
