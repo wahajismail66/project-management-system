@@ -7,9 +7,10 @@ import errorMiddleware from "./middleware/error.middleware.js";
 import userRouter from "./routes/users.route.js";
 import projectRouter from "./routes/projects.routes.js";
 import taskRouter from "./routes/tasks.route.js";
-
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -19,16 +20,16 @@ app.use("/api/v1/projects", projectRouter);
 app.use("/api/v1/tasks", taskRouter);
 
 app.get("/", (req, res) => {
-    res.send("Welcome to Project Management System");
+  res.send("Welcome to Project Management System");
 });
 
 app.use(errorMiddleware);
 
 const PORT = config().PORT;
 app.listen(PORT, async () => {
-    console.log(`Server is running on PORT: ${PORT}`)
-    console.log(`http://localhost:${PORT}`)
-    await connector();
+  console.log(`Server is running on PORT: ${PORT}`);
+  console.log(`http://localhost:${PORT}`);
+  await connector();
 });
 
 export default app;

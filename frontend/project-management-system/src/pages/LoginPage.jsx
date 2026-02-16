@@ -1,6 +1,7 @@
 import { useState } from "react";
 import LiquidFormModal from "../components/LiquidFormModal";
 import { useNavigate } from "react-router-dom";
+import { login } from "../services/Api";
 
 export const LoginPage = () => {
   const [form, setForm] = useState(true);
@@ -8,7 +9,7 @@ export const LoginPage = () => {
 
   const loginFields = [
     {
-      name: "username",
+      name: "email",
       label: "Email",
       placeholder: "email@example.com",
       required: true,
@@ -21,8 +22,19 @@ export const LoginPage = () => {
     },
   ];
 
-  const handleFormSubmit = () => {
-    console.log("Form submitted");
+  const handleFormSubmit = async (formData) => {
+    try {
+      console.log("Form submitted", formData);
+
+      const response = await login(formData);
+      console.log("Response: ", response.data.data);
+
+      localStorage.setItem("token", response.data.data.token);
+
+      navigate("/");
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   };
   return (
     <div className="flex items-center justify-center w-full h-screen">
