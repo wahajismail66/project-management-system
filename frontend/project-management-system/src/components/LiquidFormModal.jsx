@@ -1,7 +1,9 @@
+import { CircularProgress } from "@mui/material";
 import React, { useState, useEffect } from "react";
 
 const LiquidFormModal = ({
   isOpen,
+  loading,
   onClose,
   title,
   fields,
@@ -105,9 +107,14 @@ const LiquidFormModal = ({
         <div className="relative mt-10 flex flex-col gap-3 text-center">
           <button
             type="submit"
-            className={`w-full py-4 ${buttonClassName} text-white font-semibold rounded-2xl backdrop-blur-md shadow-lg shadow-blue-500/20 transition-all active:scale-[0.98]`}
+            disabled={loading}
+            className={`w-full py-4 ${buttonClassName} text-white font-semibold rounded-2xl backdrop-blur-md shadow-lg shadow-blue-500/20 transition-all active:scale-[0.98] flex items-center justify-center`}
           >
-            {buttonText}
+            {loading ? (
+              <CircularProgress size={24} sx={{ color: "white" }} />
+            ) : (
+              buttonText
+            )}
           </button>
 
           {/* DYNAMIC FOOTER TEXT */}
